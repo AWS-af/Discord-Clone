@@ -1,0 +1,59 @@
+$text-color-1: white;
+$text-color-2: black;
+$padding-sizes:(
+    'sm': 10px,
+    'md': 14px,
+    'lg': 18px,
+    'xl': 24px,
+    '2xl': 30px,
+    '3xl': 42px
+);
+$margin-sizes:(
+    'sm': 10px,
+    'md': 14px,
+    'lg': 18px,
+    'xl': 24px,
+    '2xl': 30px,
+    '3xl': 42px
+);
+$text-sizes:(
+    'sm': 10px,
+    'md': 14px,
+    'lg': 18px,
+    'xl': 24px,
+    '2xl': 30px,
+    '3xl': 42px
+);
+@function padding-size($padding-name){
+    @return map-get($padding-sizes $padding-name );
+}
+@function margin-size($margin-name){
+    @return map-get($margin-sizes, $margin-name );
+}
+@function text-size($text-name){
+    @return map-get($text-sizes, $text-name);
+}
+@mixin flex($justify, $align, $direction, $gap){
+    display: flex;
+    justify-content: $justify;
+    align-items: $align;
+    flex-direction: $direction;
+    gap: $gap;
+}
+@font-face{
+    font-family: ggsans;
+    src: url('./assets/ggsans-Normal.ttf');
+}
+*{
+    font-family: ggsans;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 0%;
+    margin: 0%;
+    scroll-behavior: smooth;
+}
+
+
+/* NAV SECTION STARTS HERE */
+
