@@ -1,59 +1,244 @@
 $text-color-1: white;
-$text-color-2: black;
-$padding-sizes:(
-    'sm': 10px,
-    'md': 14px,
-    'lg': 18px,
-    'xl': 24px,
-    '2xl': 30px,
-    '3xl': 42px
+$text-color-2: rgb(19, 19, 19);
+$primary-color: #5865f2;
+$secondary-color: #3442d9;
+$padding-sizes: (
+  "sm": 10px,
+  "md": 14px,
+  "lg": 18px,
+  "xl": 24px,
+  "xxl": 30px,
+  "3xl": 42px,
 );
-$margin-sizes:(
-    'sm': 10px,
-    'md': 14px,
-    'lg': 18px,
-    'xl': 24px,
-    '2xl': 30px,
-    '3xl': 42px
+$margin-sizes: (
+  "sm": 10px,
+  "md": 14px,
+  "lg": 18px,
+  "xl": 24px,
+  "xxl": 30px,
+  "xxxl": 42px,
 );
-$text-sizes:(
-    'sm': 10px,
-    'md': 14px,
-    'lg': 18px,
-    'xl': 24px,
-    '2xl': 30px,
-    '3xl': 42px
+$text-sizes: (
+  "sm": 10px,
+  "md": 14px,
+  "lg": 18px,
+  "xl": 24px,
+  "xxl": 30px,
+  "xxxl": 42px,
 );
-@function padding-size($padding-name){
-    @return map-get($padding-sizes $padding-name );
+@function padding-size($padding-name) {
+  @return map-get($padding-sizes, $padding-name);
 }
-@function margin-size($margin-name){
-    @return map-get($margin-sizes, $margin-name );
+@function margin-size($margin-name) {
+  @return map-get($margin-sizes, $margin-name);
 }
-@function text-size($text-name){
-    @return map-get($text-sizes, $text-name);
+@function text-size($text-name) {
+  @return map-get($text-sizes, $text-name);
 }
-@mixin flex($justify, $align, $direction, $gap){
-    display: flex;
-    justify-content: $justify;
-    align-items: $align;
-    flex-direction: $direction;
-    gap: $gap;
+@mixin display($right) {
+  @if ($right == -100%) {
+    display: none;
+  }
+  else {
+    display: block;
+  }
 }
-@font-face{
-    font-family: ggsans;
-    src: url('./assets/ggsans-Normal.ttf');
+@mixin flex($justify, $align, $direction, $gap) {
+  display: flex;
+  justify-content: $justify;
+  align-items: $align;
+  flex-direction: $direction;
+  gap: $gap;
 }
-*{
-    font-family: ggsans;
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    padding: 0%;
-    margin: 0%;
-    scroll-behavior: smooth;
+@font-face {
+  font-family: ggsans;
+  src: url("./assets/ggsans-Normal.ttf");
 }
-
 
 /* NAV SECTION STARTS HERE */
+.nav_hover {
+  width: 100%;
+  height: fit-content;
+  position: sticky;
+  top: 0%;
+  left: 0%;
+  transition: all 400ms ease-in-out;
+  background-color: rgb(88, 101, 242) !important;
+}
 
+.nav {
+  width: 100%;
+  height: fit-content;
+  color: $text-color-1;
+  transition: all 400ms ease-in-out;
+  background: linear-gradient(to right, #3d49d1 1%, $secondary-color);
+  & &_container {
+    width: 90%;
+    height: 100%;
+    margin: auto;
+    padding: 20px 0;
+    @include flex(space-between, center, row, 0px);
+    & .nav_logo {
+      width: 130px;
+      & img {
+        filter: invert(92%) sepia(77%) saturate(2%) hue-rotate(15deg)
+          brightness(109%) contrast(100%);
+      }
+    }
+    & .nav_extra_icons {
+      @include flex(space-between, center, row, 36px);
+      .nav_login_button {
+        display: none;
+        background-color: white;
+        padding: 8px 14px;
+        transition: all 400ms ease-in-out;
+        border-radius: 20px;
+        & a {
+          color: $text-color-2;
+          font-weight: 1000;
+          font-size: 15px;
+        }
+        &:hover {
+          box-shadow: 0px 0px 5px 0px black;
+          transition: all 400ms ease-in-out;
+          & a {
+            color: #3442d9;
+          }
+        }
+      }
+      & .nav_menu_icon {
+        font-size: text-size(xxl);
+        width: fit-content;
+        height: fit-content;
+      }
+    }
+    & .nav_links {
+      display: none;
+    }
+  }
+  & &_menu {
+    width: 320px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    color: $text-color-2;
+    background-color: white;
+    transition: all 300ms ease-in-out;
+    &_logo {
+      width: 100%;
+      height: fit-content;
+      @include flex(space-between, center, row, 0);
+      border-bottom: 1px solid rgb(234, 234, 234);
+      padding: padding-size(xl);
+      font-size: text-size(xl);
+      & img {
+        width: 120px;
+      }
+    }
+    &_links {
+      width: 98%;
+      height: fit-content;
+      list-style-type: none;
+      @include flex(center, start, column, 20px);
+      padding: padding-size(xxl);
+      margin: auto;
+      font-weight: 600;
+      & li a {
+        color: $text-color-2;
+      }
+    }
+    & button {
+      width: 86%;
+      padding: padding-size(sm) padding-size(lg);
+      margin: 40px auto 0px auto;
+      border-radius: 20px;
+      border: none;
+      @include flex(start, center, row, 70px);
+      background-color: $primary-color;
+      color: $text-color-1;
+      font-weight: 600;
+      font-size: text-size(lg);
+    }
+  }
+  & &_menu_click {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    transition: all 400ms ease-in-out;
+  }
+}
+
+/* HERO SECTION STARTS HERE */
+.hero {
+  background: linear-gradient(to right, #3d49d1 1%, $secondary-color);
+  color: $text-color-1;
+  line-height: 25px;
+  width: 100%;
+  height: fit-content;
+  & &_container {
+    width: 100%;
+    height: 100%;
+    @include flex(start, start, column, 27px);
+    padding: padding-size(xl) padding-size(lg);
+    margin-top: 50px;
+    & .hero_header {
+      font-weight: 1000;
+      font-size: 40px;
+      line-height: 40px;
+    }
+    & .hero_buttons{
+        width: 100%;
+        height: fit-content;
+        & .download{
+            width: 70%;
+            border: none;
+            background-color: rgb(255, 255, 255);
+            padding: padding-size(md);
+            border-radius: 20px;
+            @include flex(start, center, row, 45px );
+            font-size: text-size(lg);
+            font-weight: bolder;
+            & a{
+                width: 100%;
+                height: 100%;
+                color: $text-color-2;
+            }
+        }
+        & .login{
+            display: none;
+        }
+    }
+  }
+}
+
+@media (min-width: 474px) {
+  .nav {
+    & &_container {
+      & .nav_extra_icons {
+        .nav_login_button {
+          display: block;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 999px) {
+  .nav {
+    & &_container {
+      & .nav_links {
+        @include flex(center, center, row, 45px);
+        & a {
+          font-weight: 700;
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+    & .nav_menu_icon {
+      display: none;
+    }
+  }
+}
