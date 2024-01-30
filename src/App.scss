@@ -57,21 +57,19 @@ $text-sizes: (
 
 /* NAV SECTION STARTS HERE */
 .nav_hover {
-  width: 100%;
-  height: fit-content;
-  position: sticky;
+  position: fixed;
   top: 0%;
   left: 0%;
-  transition: all 400ms ease-in-out;
-  background-color: rgb(88, 101, 242) !important;
+  transition: all 200ms ease-in-out;
+  background-color: $primary-color;
+  z-index: 50;
 }
 
 .nav {
   width: 100%;
   height: fit-content;
   color: $text-color-1;
-  transition: all 400ms ease-in-out;
-  background: linear-gradient(to right, #3d49d1 1%, $secondary-color);
+  transition: all 200ms ease-in-out;
   & &_container {
     width: 90%;
     height: 100%;
@@ -99,12 +97,12 @@ $text-sizes: (
           font-size: 15px;
         }
         &:hover {
-          box-shadow: 0px 0px 5px 0px black;
-          transition: all 400ms ease-in-out;
-          & a {
-            color: #3442d9;
+            box-shadow: 0px 0px 5px 0px black;
+            transition: all 400ms ease-in-out;
+            & a {
+              color: #3442d9;
+            }
           }
-        }
       }
       & .nav_menu_icon {
         font-size: text-size(xxl);
@@ -117,14 +115,15 @@ $text-sizes: (
     }
   }
   & &_menu {
-    width: 320px;
+    width: 0px;
     height: 100vh;
-    position: fixed;
-    top: 0;
-    right: -100%;
+    position: absolute;
+    top: 0%;
+    right: 0%;
     color: $text-color-2;
     background-color: white;
     transition: all 300ms ease-in-out;
+    z-index: 100;
     &_logo {
       width: 100%;
       height: fit-content;
@@ -132,6 +131,7 @@ $text-sizes: (
       border-bottom: 1px solid rgb(234, 234, 234);
       padding: padding-size(xl);
       font-size: text-size(xl);
+      display: none;
       & img {
         width: 120px;
       }
@@ -144,6 +144,7 @@ $text-sizes: (
       padding: padding-size(xxl);
       margin: auto;
       font-weight: 600;
+      display: none;
       & li a {
         color: $text-color-2;
       }
@@ -159,59 +160,108 @@ $text-sizes: (
       color: $text-color-1;
       font-weight: 600;
       font-size: text-size(lg);
+      display: none;
     }
   }
   & &_menu_click {
+    width: 322px;
     position: absolute;
-    right: 0;
-    top: 0;
-    display: block;
     transition: all 400ms ease-in-out;
+    & .nav_menu_logo {
+      width: 100%;
+      display: flex;
+    }
+    & .nav_menu_links {
+      width: 100%;
+      display: flex;
+    }
+    & button {
+      display: flex;
+    }
   }
 }
 
 /* HERO SECTION STARTS HERE */
 .hero {
-  background: linear-gradient(to right, #3d49d1 1%, $secondary-color);
   color: $text-color-1;
   line-height: 25px;
   width: 100%;
   height: fit-content;
+  position: relative;
+  @include flex(start, center, column-reverse, 0);
+  & .hero_bg_right {
+    width: 100%;
+    height: 100%;
+  }
+  & .hero_bg_left{
+    display: none;
+  }
   & &_container {
     width: 100%;
     height: 100%;
-    @include flex(start, start, column, 27px);
+    @include flex(start, start,column, 27px);
     padding: padding-size(xl) padding-size(lg);
     margin-top: 50px;
     & .hero_header {
       font-weight: 1000;
-      font-size: 40px;
-      line-height: 40px;
+      font-size: 30px;
+      line-height: 35px;
+      font-family: 'Anton', sans-serif;
+      word-spacing: 4px;
+      letter-spacing: 4px;
     }
-    & .hero_buttons{
-        width: 100%;
-        height: fit-content;
-        & .download{
-            width: 70%;
-            border: none;
-            background-color: rgb(255, 255, 255);
-            padding: padding-size(md);
-            border-radius: 20px;
-            @include flex(start, center, row, 45px );
-            font-size: text-size(lg);
-            font-weight: bolder;
-            & a{
-                width: 100%;
-                height: 100%;
-                color: $text-color-2;
-            }
+    & .hero_buttons {
+      width: 100%;
+      height: fit-content;
+      & .download {
+        width: 70%;
+        border: none;
+        background-color: rgb(255, 255, 255);
+        padding: padding-size(md);
+        border-radius: 20px;
+        @include flex(start, center, row, 45px);
+        font-size: text-size(lg);
+        font-weight: bolder;
+        & a {
+          width: 100%;
+          height: 100%;
+          color: $text-color-2;
         }
-        & .login{
-            display: none;
-        }
+      }
+      & .login {
+        display: none;
+      }
     }
   }
 }
+
+/* HERO SECOND SECTION STARTS HERE */
+
+.hero_2{
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    @include flex(start, center, column, 30px);
+    padding: padding-size(xxl) padding-size(lg);
+    & &_bg{
+        margin-top: 30px;
+        width: 100%;
+        height: 100%;
+        & img{
+            width: 100%;
+            height: 100%;
+        }
+    }
+    & &_info{
+        width: 100%;
+        height: 100%;
+        @include flex(start, start, column, 20px );
+        & .hero_2_header{
+            font-weight: 1000;
+        }
+    }
+}
+
 
 @media (min-width: 474px) {
   .nav {
@@ -223,6 +273,57 @@ $text-sizes: (
       }
     }
   }
+}
+@media (min-width: 767px){
+    .hero{
+        & &_container{
+            width: 90%;
+            margin: 50px auto;
+            @include flex(center, center, column, 20px );
+            padding: padding-size(xl) 0;
+            & .hero_header{
+                width: 391px;
+                font-size:55px;
+                letter-spacing: 6px;
+                text-align: center;
+                line-height: 60px;
+            }
+            & .hero_info{
+                font-size: 22px;
+            }
+            & .hero_buttons{
+                width: 100%;
+                @include flex(center, center, row, 20px );
+                & .download{
+                    width: 100%;
+                    gap: 110px;
+                }
+                & .login{
+                    width: 100%;
+                    display: block;
+                    border: none;
+                    background-color: rgb(0, 0, 0);
+                    padding: padding-size(md);
+                    border-radius: 20px;
+                    @include flex(center, center, row, 0);
+                    font-size: text-size(lg);
+                    font-weight: bolder;
+                }
+            }
+        }
+    }
+    .hero_2{
+        padding: padding-size(xxl);
+        & &_info{
+            padding: padding-size(md);
+            & h2{
+                font-size: text-size(xxl);
+            }
+            & p{
+                font-size: text-size(lg);
+            }
+        }
+    }
 }
 @media (min-width: 999px) {
   .nav {
@@ -239,6 +340,80 @@ $text-sizes: (
     }
     & .nav_menu_icon {
       display: none;
+    }
+  }
+  .hero{
+    width: 100%;
+    height: 400px;
+    @include flex(space-between, center, row, 0px);
+    position: relative;
+    overflow: hidden;
+    margin-top: 90px;
+    & &_bg_left{
+        display: inline-block;
+        width: 649px;
+        height: 352px;
+        position: absolute;
+        right: -20%;
+        bottom: -15%;
+        z-index: -1;
+    }
+    & &_bg_right{
+        width: 689px;
+        height: 352px;
+        width: fit-content;
+        position: absolute;
+        left: -27%;
+        bottom: -15%;
+        z-index: -1;
+    }
+    & &_container{
+        @include flex(start, center, column, 40px );
+        & .hero_header{
+            width: fit-content;
+        }
+        & .hero_info{
+            width: 740px;
+            text-align: center;
+        }
+        & .hero_buttons{
+            width: 500px;
+            & .download{
+                width: 40%;
+                gap: 30px;
+                padding: padding-size(lg);
+                border-radius: 50px;
+                font-size: 23px;
+                cursor: pointer;
+                &:hover{
+                    color: #3442d9;
+                    box-shadow: 1px 0px 5px 0px black;
+                }
+            }
+            & .login{
+                width: 60%;
+                border-radius: 50px;
+                padding: padding-size(lg);
+                background-color: rgb(33, 33, 33);
+            }
+        }
+    }
+  }
+  .hero_2{
+    @include flex(space-between, center, row, 70px);
+    padding: padding-size(xxl) 100px;
+    & &_bg{
+        width: 50%;
+    }
+    & &_info{
+        width: 400px;
+        & .hero_2_header{
+            font-size: 50px;
+            line-height: 49px;
+        }
+        & p{
+            font-size: 20px;
+        }
     }
   }
 }

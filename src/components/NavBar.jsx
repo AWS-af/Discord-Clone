@@ -14,7 +14,7 @@ function NavBar() {
     setClick((prev) => !prev);
   };
   function handleNav(){
-    if(window.scrollY > 10 && window.innerWidth < 1024){
+    if(window.scrollY > 1 && window.innerWidth < 1024){
         setNav(true);
     }else{
         setNav(false)

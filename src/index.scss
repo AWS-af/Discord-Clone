@@ -13,6 +13,8 @@ $secondary-color: #3442d9;
 }
 body {
   background: linear-gradient(to right, #3d49d1 1%, $secondary-color);
+  max-width: 1320px;
+  margin: auto;
 }
 a {
   color: white;
